@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Registration Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#registerForm').submit(function(event) {
+        event.preventDefault(); 
+
+        var name = $('#name').val();
+        var password = $('#password').val();
+        var confirmPassword = $('#confirmPassword').val();
+
+        if (name === '' || password === '' || confirmPassword === '') {
+   
+          $('#errorMessage').text('Будь ласка, заповніть усі поля');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+
+          $('#errorMessage').text('Паролі не збігаються');
+          return;
+        }
+
+
+        $('#successMessage').show();
+
+
+        $(this).unbind('submit').submit();
+      });
+    });
+  </script>
+</head>
+<body>
+  <form id="registerForm">
+    <label for="name">Логін:</label>
+    <input type="text" id="name" name="name">
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password">
+
+    <label for="confirmPassword">Підтвердження паролю:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword">
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p id="errorMessage" class="error"></p>
+  <p id="successMessage" style="display:none;">Реєстрація успішна!</p>
+</body>
+</html>
